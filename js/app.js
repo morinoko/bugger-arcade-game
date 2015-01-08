@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function(x, y) {
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -9,6 +9,10 @@ var Enemy = function(x, y) {
 
     this.x = x;
     this.y = y;
+    this.speed = speed;
+
+  // Define sprite size for collision
+  // TODO add collision coords
 }
 
 // Update the enemy's position, required method for game
@@ -17,6 +21,14 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    // Move enemy across screen at its given speed
+    velocity = this.speed * dt;
+    this.x += velocity;
+
+    if (this.x > 500) {
+      this.x = -120;
+    }
 }
 
 // Draw the enemy on the screen, required method for game
@@ -34,6 +46,9 @@ var Player = function (x, y) {
 
   this.x = x;
   this.y = y;
+
+  // Define sprite size for collision
+  // TODO add collision coords
 }
 
 Player.prototype.update = function(dt) {
@@ -45,20 +60,29 @@ Player.prototype.render = function() {
 }
 
 Player.prototype.handleInput = function(key) {
+  //TODO add functionality for goal reset and block movement offscreen
   if (key === 'left') {
-    this.x -= 101;
+    if (this.x > 0) {
+      this.x -= 101;
+    }
   }
 
   if (key === 'right') {
-    this.x += 101;
+    if (this.x < 400) {
+      this.x += 101;
+    }
   }
 
   if (key === 'up') {
-    this.y -= 84;
+    if (this.y > 20 ) {
+      this.y -= 84;
+    }
   }
 
   if (key === 'down') {
-    this.y += 84;
+    if (this.y < 400 ) {
+      this.y += 84;
+    }
   }
 }
 
@@ -67,9 +91,9 @@ Player.prototype.handleInput = function(key) {
 // Place the player object in a variable called player
 
 var allEnemies = [
-    new Enemy(0, 60),
-    new Enemy(250, 145),
-    new Enemy(120, 230)
+    new Enemy(0, 60, 200),
+    new Enemy(250, 145, 100),
+    new Enemy(100, 230, 100)
 ];
 
 var player = new Player (200, 400);
