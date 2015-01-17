@@ -10,12 +10,6 @@ var Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
-
-    // Define enemy coordinates for collision
-    this.left = x+2;
-    this.right = x + 99;
-    this.top = y + 76;
-    this.bottom = y + 143;
 }
 
 // Update the enemy's position, required method for game
@@ -32,6 +26,28 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 500) {
       this.x = -120;
     }
+
+    // Define enemy box for collision detection
+    this.left = this.x + 2;
+    this.right = this.x + 99;
+    this.top = this.y + 76;
+    this.bottom = this.y + 143;
+
+    // Check if player has collided
+    this.detectCollision(this, player);
+}
+
+Enemy.prototype.colliding = function(enemy, player) {
+  return !(player.left > enemy.right ||
+           player.right < enemy.left ||
+           player.top > enemy.bottom ||
+           player.bottom < enemy.top);
+}
+
+Enemy.prototype.detectCollision = function (enemy, player) {
+  if (this.colliding(enemy, player)) {
+    player.reset();
+  }
 }
 
 // Draw the enemy on the screen, required method for game
@@ -50,16 +66,19 @@ var Player = function (x, y) {
   this.x = x;
   this.y = y;
   console.log(x);
-
-  // Define player coordinates for collision
-  this.left = x + 17;
-  this.right = x + 84;
-  this.top = y + 60;
-  this.bottom = y + 140;
 }
 
 Player.prototype.update = function(dt) {
-  // TODO add functionality
+  // Define player box for collision detection
+  this.left = this.x + 17;
+  this.right = this.x + 84;
+  this.top = this.y + 60;
+  this.bottom = this.y + 140;
+}
+
+Player.prototype.reset = function() {
+    this.x = 200;
+    this.y = 400;
 }
 
 Player.prototype.render = function() {
@@ -67,7 +86,6 @@ Player.prototype.render = function() {
 }
 
 Player.prototype.handleInput = function(key) {
-  //TODO add functionality for goal reset and block movement offscreen
   if (key === 'left') {
     if (this.x > 0) {
       this.x -= 101;
@@ -100,7 +118,7 @@ Player.prototype.handleInput = function(key) {
 var allEnemies = [
     new Enemy(0, 60, 200),
     new Enemy(250, 145, 400),
-    new Enemy(200, 230, 0)
+    new Enemy(200, 230, 100)
 ];
 
 var player = new Player (200, 400);
