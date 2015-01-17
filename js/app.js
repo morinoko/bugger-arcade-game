@@ -105,7 +105,6 @@ var Player = function (x, y) {
 
   this.x = x;
   this.y = y;
-  console.log(x);
 }
 
 Player.prototype.update = function(dt) {
@@ -157,6 +156,7 @@ Player.prototype.handleInput = function(key) {
 
 var allEnemies = [
     new Enemy(0, 227, 200),
+    new Enemy(300, 227, 200),
     new Enemy(250, 312, 400),
     new Enemy(200, 397, 100)
 ];
