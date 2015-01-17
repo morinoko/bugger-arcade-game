@@ -1,7 +1,9 @@
 // Goal that player must reach to win
 var Goal = function(x, y) {
+  // set goal sprite image
   this.sprite = 'images/Selector.png';
 
+  // set goal position
   this.x = x;
   this.y = y;
 }
@@ -36,21 +38,18 @@ Goal.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// Enemies our player must avoid
+// Enemies the player must avoid
 var Enemy = function(x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    // set enemy image sprite
     this.sprite = 'images/enemy-bug.png';
 
+    // set enemy start position and speed
     this.x = x;
     this.y = y;
     this.speed = speed;
 }
 
-// Update the enemy's position, required method for game
+// Update the enemy's position
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
@@ -96,13 +95,12 @@ Enemy.prototype.render = function() {
 }
 
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player Class
 var Player = function (x, y) {
-
+  // set player image sprite
   this.sprite = 'images/char-cat-girl.png';
 
+  // set player start position
   this.x = x;
   this.y = y;
 }
@@ -115,6 +113,7 @@ Player.prototype.update = function(dt) {
   this.bottom = this.y + 140;
 }
 
+// Reset to start position
 Player.prototype.reset = function() {
     this.x = 200;
     this.y = 570;
@@ -124,6 +123,7 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+// Player movement
 Player.prototype.handleInput = function(key) {
   if (key === 'left') {
     if (this.x > 0) {
@@ -150,10 +150,7 @@ Player.prototype.handleInput = function(key) {
   }
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
+// Instatuate enemies, player and goal
 var allEnemies = [
     new Enemy(0, 227, 200),
     new Enemy(300, 227, 200),
@@ -161,7 +158,7 @@ var allEnemies = [
     new Enemy(200, 397, 100)
 ];
 
-var player = new Player (200, 500);
+var player = new Player (200, 570);
 
 var goal = new Goal (202, 127);
 
