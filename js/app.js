@@ -6,7 +6,7 @@ var Goal = function(x, y) {
   this.y = y;
 }
 
-//
+// Check if player has reached goal
 Goal.prototype.colliding = function(goal, player) {
   return !(player.left > goal.right ||
            player.right < goal.left ||
@@ -14,9 +14,10 @@ Goal.prototype.colliding = function(goal, player) {
            player.bottom < goal.top);
 }
 
+// Reset game after reaching goal
 Goal.prototype.detectCollision = function (goal, player) {
   if (this.colliding(goal, player)) {
-    player.reset();
+    setTimeout(function(){player.reset()}, 600);
   }
 }
 
@@ -25,7 +26,7 @@ Goal.prototype.update = function(dt) {
     this.left = this.x;
     this.right = this.x + 99;
     this.top = this.y + 88;
-    this.bottom = this.y + 170;
+    this.bottom = this.y + 165;
 
     // Check if player has collided
     this.detectCollision(this, player);
@@ -117,7 +118,7 @@ Player.prototype.update = function(dt) {
 
 Player.prototype.reset = function() {
     this.x = 200;
-    this.y = 400;
+    this.y = 487;
 }
 
 Player.prototype.render = function() {
@@ -139,12 +140,12 @@ Player.prototype.handleInput = function(key) {
 
   if (key === 'up') {
     if (this.y > 20 ) {
-      this.y -= 84;
+      this.y -= 83;
     }
   }
 
   if (key === 'down') {
-    if (this.y < 400 ) {
+    if (this.y < 500 ) {
       this.y += 84;
     }
   }
@@ -155,14 +156,14 @@ Player.prototype.handleInput = function(key) {
 // Place the player object in a variable called player
 
 var allEnemies = [
-    new Enemy(0, 60, 200),
-    new Enemy(250, 145, 400),
-    new Enemy(200, 230, 100)
+    new Enemy(0, 144, 200),
+    new Enemy(250, 229, 400),
+    new Enemy(200, 314, 100)
 ];
 
-var player = new Player (200, 400);
+var player = new Player (200, 487);
 
-var goal = new Goal (202, -39);
+var goal = new Goal (202, 44);
 
 
 // This listens for key presses and sends the keys to your
