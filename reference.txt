@@ -1,3 +1,9 @@
 Canvas and Object Movement:
 http://codetheory.in/rendering-animations-with-moving-objects-on-canvas/
 
+Udacity lesson on Collision detection
+https://www.udacity.com/course/viewer#!/c-cs255/l-52265917/e-130215279/m-129941630
+
+Other student's repos:
+https://github.com/garrettbryan/Ladybug-Run/
+https://github.com/jvojens2/frontend-nanodegree-arcade-game
