@@ -1,3 +1,40 @@
+// Goal that player must reach to win
+var Goal = function(x, y) {
+  this.sprite = 'images/Selector.png';
+
+  this.x = x;
+  this.y = y;
+}
+
+//
+Goal.prototype.colliding = function(goal, player) {
+  return !(player.left > goal.right ||
+           player.right < goal.left ||
+           player.top > goal.bottom ||
+           player.bottom < goal.top);
+}
+
+Goal.prototype.detectCollision = function (goal, player) {
+  if (this.colliding(goal, player)) {
+    player.reset();
+  }
+}
+
+Goal.prototype.update = function(dt) {
+    // Define goal box for collision detection
+    this.left = this.x;
+    this.right = this.x + 99;
+    this.top = this.y + 88;
+    this.bottom = this.y + 170;
+
+    // Check if player has collided
+    this.detectCollision(this, player);
+}
+
+Goal.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
@@ -37,6 +74,7 @@ Enemy.prototype.update = function(dt) {
     this.detectCollision(this, player);
 }
 
+// Function to check for Enemy Player collisions
 Enemy.prototype.colliding = function(enemy, player) {
   return !(player.left > enemy.right ||
            player.right < enemy.left ||
@@ -44,6 +82,7 @@ Enemy.prototype.colliding = function(enemy, player) {
            player.bottom < enemy.top);
 }
 
+// Reset player position if collided with enemy
 Enemy.prototype.detectCollision = function (enemy, player) {
   if (this.colliding(enemy, player)) {
     player.reset();
@@ -122,6 +161,8 @@ var allEnemies = [
 ];
 
 var player = new Player (200, 400);
+
+var goal = new Goal (202, -39);
 
 
 // This listens for key presses and sends the keys to your
