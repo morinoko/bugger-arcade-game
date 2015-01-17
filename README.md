@@ -1,7 +1,8 @@
 # Bugger
 ===============================
 ## How to play:
-Open the game here: 
+You can play the game here:
+http://morinoko.github.io/bugger-arcade-game/
 
 ## Goal: 
 Reach the goal without running into any moving ladybugs.
