@@ -118,7 +118,7 @@ Player.prototype.update = function(dt) {
 
 Player.prototype.reset = function() {
     this.x = 200;
-    this.y = 487;
+    this.y = 570;
 }
 
 Player.prototype.render = function() {
@@ -145,8 +145,8 @@ Player.prototype.handleInput = function(key) {
   }
 
   if (key === 'down') {
-    if (this.y < 500 ) {
-      this.y += 84;
+    if (this.y < 570 ) {
+      this.y += 83;
     }
   }
 }
@@ -156,14 +156,14 @@ Player.prototype.handleInput = function(key) {
 // Place the player object in a variable called player
 
 var allEnemies = [
-    new Enemy(0, 144, 200),
-    new Enemy(250, 229, 400),
-    new Enemy(200, 314, 100)
+    new Enemy(0, 227, 200),
+    new Enemy(250, 312, 400),
+    new Enemy(200, 397, 100)
 ];
 
-var player = new Player (200, 487);
+var player = new Player (200, 500);
 
-var goal = new Goal (202, 44);
+var goal = new Goal (202, 127);
 
 
 // This listens for key presses and sends the keys to your
