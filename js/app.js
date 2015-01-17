@@ -11,8 +11,11 @@ var Enemy = function(x, y, speed) {
     this.y = y;
     this.speed = speed;
 
-  // Define sprite size for collision
-  // TODO add collision coords
+    // Define enemy coordinates for collision
+    this.left = x+2;
+    this.right = x + 99;
+    this.top = y + 76;
+    this.bottom = y + 143;
 }
 
 // Update the enemy's position, required method for game
@@ -46,9 +49,13 @@ var Player = function (x, y) {
 
   this.x = x;
   this.y = y;
+  console.log(x);
 
-  // Define sprite size for collision
-  // TODO add collision coords
+  // Define player coordinates for collision
+  this.left = x + 17;
+  this.right = x + 84;
+  this.top = y + 60;
+  this.bottom = y + 140;
 }
 
 Player.prototype.update = function(dt) {
@@ -92,8 +99,8 @@ Player.prototype.handleInput = function(key) {
 
 var allEnemies = [
     new Enemy(0, 60, 200),
-    new Enemy(250, 145, 100),
-    new Enemy(100, 230, 100)
+    new Enemy(250, 145, 400),
+    new Enemy(200, 230, 0)
 ];
 
 var player = new Player (200, 400);
