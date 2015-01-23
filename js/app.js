@@ -19,7 +19,7 @@ Goal.prototype.colliding = function(goal, player) {
 // Reset game after reaching goal
 Goal.prototype.detectCollision = function (goal, player) {
   if (this.colliding(goal, player)) {
-    setTimeout(function(){player.reset()}, 600);
+    setTimeout(function(){player.reset()}, 600); // add some time lag so it's a little smoother
   }
 }
 
@@ -40,21 +40,20 @@ Goal.prototype.render = function() {
 
 // Enemies the player must avoid
 var Enemy = function(x, y, speed) {
-    // set enemy image sprite
-    this.sprite = 'images/enemy-bug.png';
-
     // set enemy start position and speed
     this.x = x;
     this.y = y;
     this.speed = speed;
+
+    // set enemy image sprite
+    this.sprite = 'images/enemy-bug.png';
 }
 
 // Update the enemy's position
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    // Multiplying any movement by the dt parameter
+    // will ensure the game runs at the same speed for all computers.
 
     // Move enemy across screen at its given speed
     velocity = this.speed * dt;
@@ -94,6 +93,33 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+var Dragonfly = function(x, y, speed) {
+  // get position and speed
+  Enemy.call(this, x, y, speed);
+
+  // set dragonfly sprite image
+  this.sprite = 'images/enemy-dragonfly.png'
+}
+
+Dragonfly.prototype = Object.create(Enemy.prototype);
+Dragonfly.prototype.constructor = Dragonfly;
+Dragonfly.prototype.update = function(dt) {
+    velocity = this.speed * dt;
+    this.x += velocity;
+
+    if (this.x > 500) {
+      this.x = -120;
+    }
+
+    // Define enemy dragonfly box for collision detection
+    this.left = this.x;
+    this.right = this.x + 101;
+    this.top = this.y;
+    this.bottom = this.y + 123;
+
+    // Check if player has collided
+    this.detectCollision(this, player);
+}
 
 // Player Class
 var Player = function (x, y) {
@@ -153,9 +179,9 @@ Player.prototype.handleInput = function(key) {
 // Instatuate enemies, player and goal
 var allEnemies = [
     new Enemy(0, 227, 200),
-    new Enemy(300, 227, 200),
-    new Enemy(250, 312, 400),
-    new Enemy(200, 397, 100)
+    new Dragonfly(250, 340, 500),
+    new Enemy(200, 397, 150),
+    new Enemy(400, 397, 150)
 ];
 
 var player = new Player (200, 570);
