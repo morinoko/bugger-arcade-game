@@ -6,7 +6,7 @@ var Goal = function(x, y) {
   // set goal position
   this.x = x;
   this.y = y;
-}
+};
 
 // Check if player has reached goal
 Goal.prototype.colliding = function(goal, player) {
@@ -48,7 +48,7 @@ var Enemy = function(x, y, speed) {
 
     // set enemy image sprite
     this.sprite = 'images/enemy-bug.png';
-}
+};
 
 // Update the enemy's position
 // Parameter: dt, a time delta between ticks
@@ -101,7 +101,7 @@ var Dragonfly = function(x, y, speed) {
 
   // set dragonfly sprite image
   this.sprite = 'images/enemy-dragonfly.png'
-}
+};
 
 Dragonfly.prototype = Object.create(Enemy.prototype);
 Dragonfly.prototype.constructor = Dragonfly;
@@ -131,7 +131,7 @@ var Player = function (x, y) {
   // set player start position
   this.x = x;
   this.y = y;
-}
+};
 
 Player.prototype.update = function(dt) {
   // Define player box for collision detection
