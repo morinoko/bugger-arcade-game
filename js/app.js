@@ -16,7 +16,7 @@ Goal.prototype.colliding = function(goal, player) {
            player.bottom < goal.top);
 }
 
-// Reset game after reaching goal
+// Reset player after reaching goal
 Goal.prototype.detectCollision = function (goal, player) {
   if (this.colliding(goal, player)) {
     setTimeout(function(){player.reset()}, 600); // add some time lag so it's a little smoother
@@ -180,8 +180,8 @@ Player.prototype.handleInput = function(key) {
 var allEnemies = [
     new Enemy(0, 227, 200),
     new Dragonfly(250, 340, 500),
-    new Enemy(200, 397, 150),
-    new Enemy(400, 397, 150)
+    new Enemy(400, 397, 150),
+    new Enemy(100, 397, 220)
 ];
 
 var player = new Player (200, 570);
