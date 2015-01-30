@@ -19,7 +19,7 @@ Goal.prototype.colliding = function(goal, player) {
 // Reset player after reaching goal
 Goal.prototype.detectCollision = function (goal, player) {
   if (this.colliding(goal, player)) {
-    setTimeout(function(){player.reset()}, 600); // add some time lag so it's a little smoother
+    setTimeout(function(){player.reset()}, 600); // add some time lag so reset is a little smoother
   }
 }
 
@@ -34,6 +34,7 @@ Goal.prototype.update = function(dt) {
     this.detectCollision(this, player);
 }
 
+// Draw goal on screen
 Goal.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
@@ -88,11 +89,12 @@ Enemy.prototype.detectCollision = function (enemy, player) {
   }
 }
 
-// Draw the enemy on the screen, required method for game
+// Draw the enemy on the screen
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+// Dragonfly is second type of enemy, with different sprite and collision box
 var Dragonfly = function(x, y, speed) {
   // get position and speed
   Enemy.call(this, x, y, speed);
@@ -145,11 +147,12 @@ Player.prototype.reset = function() {
     this.y = 570;
 }
 
+// Draw player on screen
 Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// Player movement
+// Player movement, depending on what keys are pushed
 Player.prototype.handleInput = function(key) {
   if (key === 'left') {
     if (this.x > 0) {
@@ -176,7 +179,7 @@ Player.prototype.handleInput = function(key) {
   }
 }
 
-// Instatuate enemies, player and goal
+// Instantiate enemies, player and goal
 var allEnemies = [
     new Enemy(0, 227, 200),
     new Dragonfly(250, 340, 500),
